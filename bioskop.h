@@ -10,7 +10,7 @@ using namespace std;
 #define next(P) P->next
 #define prev(P) P->prev
 #define nextFilm(R) R->nextFilm
-#define nextPenonton(R) R->nextPenonton
+#define nextaktor(R) R->nextaktor
 #define first(L) L.first
 #define last(L) L.last
 
@@ -20,8 +20,8 @@ using namespace std;
 struct Film {
     int id_Film;
     string judul;
-    string jam_Tayang;
-    int harga;
+    string namaaktor;
+    int durasi;
     int jumlah_Penonton;
 };
 
@@ -39,23 +39,23 @@ struct list_Film {
 };
 
 /* -----------------------------
-   STRUCT PENONTON (CHILD, SLL)
+   STRUCT AKTOR (CHILD, SLL)
    ----------------------------- */
-struct Penonton {
-    int id_Penonton;
-    string nama;
-    int banyak_Tiket;
+struct aktor {
+    int id_Film;
+    string namaaktor;
+    int durasi;
 };
 
-typedef struct elm_Penonton *adr_Penonton;
+typedef struct elm_aktor *adr_aktor;
 
-struct elm_Penonton {
-    Penonton info;
-    adr_Penonton next;
+struct elm_aktor {
+    aktor info;
+    adr_aktor next;
 };
 
-struct list_Penonton {
-    adr_Penonton first;
+struct list_aktor {
+    adr_aktor first;
 };
 
 /* ------------------
@@ -65,7 +65,7 @@ typedef struct elm_Relasi *adr_Relasi;
 
 struct elm_Relasi {
     adr_Film nextFilm;
-    adr_Penonton nextPenonton;
+    adr_aktor nextaktor;
     adr_Relasi next;
 };
 
@@ -78,12 +78,12 @@ struct list_Relasi {
    ------------ */
 
 void createListFilm(list_Film &L);
-void createListPenonton(list_Penonton &L);
+void createListaktor(list_aktor &L);
 void createListRelasi(list_Relasi &L);
 
 adr_Film newFilm(Film data);
-adr_Penonton newPenonton(Penonton data);
-adr_Relasi newRelasi(adr_Film film, adr_Penonton penonton);
+adr_Penonton newaktor(aktor data);
+adr_Relasi newRelasi(adr_Film film, adr_aktor aktor);
 
 void insert_first_Film(list_Film &L, adr_Film P);
 void insert_last_Film(list_Film &L, adr_Film P);
@@ -92,14 +92,14 @@ void deleteFilm(list_Film &filmList, list_Relasi &relasiList, int idFilm);
 adr_Film findFilm(list_Film L, int idFilm);
 void editFilm(list_Film &L, int idFilm);
 
-void ShowAllPenonton(list_Penonton L);
-adr_Penonton findPenonton(list_Penonton L, int idPenonton);
-void insert_first_Penonton(list_Penonton &L, adr_Penonton P);
-void insert_last_Penonton(list_Penonton &L, adr_Penonton P);
-void editPenonton(list_Penonton &L, int idPenonton);
+void ShowAllaktor(list_aktor L);
+adr_Penonton findaktor(list_aktor L, int idaktor);
+void insert_first_aktor(list_aktor &L, adr_aktor P);
+void insert_last_aktor(list_aktor &L, adr_aktor P);
+void editaktor(list_aktor &L, int idaktor);
 
 void insertRelasi(list_Relasi &L, adr_Film film, adr_Penonton penonton);
-void showFilmPenonton(list_Relasi L);
-void findPenontonFromFilm(list_Relasi &L, int idFilm);
+void showFilmaktor(list_Relasi L);
+void findaktorFromFilm(list_Relasi &L, int idFilm);
 
 #endif
