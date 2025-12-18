@@ -104,6 +104,6 @@ adr_aktor findaktor(list_aktor L, int idaktor); // Koreksi: sebelumnya adr_Penon
 // Operasi Relasi
 void insertRelasi(list_Relasi &L, adr_Film film, adr_aktor aktor);
 void showFilmaktor(list_Relasi L);
-void findaktorFromFilm(list_Relasi &L, int idFilm);
+void findaktorFromFilm(list_Relasi &L, int idFilm); 
 
 #endif
