@@ -53,7 +53,7 @@ void showAllFilms(list_Film L) {
         cout << "List Film Kosong." << endl;
     } else {
         while (P != NULL) {
-            cout << "ID: " << info(P).id_Film << " | Judul: " << info(P).judul 
+            cout << "ID: " << info(P).id_Film << " | Judul: " << info(P).judul
                  << " | Aktor: " << info(P).namaaktor << " | Durasi: " << info(P).durasi << endl;
             P = next(P);
         }
@@ -63,6 +63,17 @@ void showAllFilms(list_Film L) {
 /* -----------------------------
    IMPLEMENTASI LIST AKTOR
    ----------------------------- */
+adr_aktor findaktor(list_aktor L, int idaktor) {
+    adr_aktor P = first(L);
+    while (P != NULL) {
+        if (info(P).id_aktor == idaktor) {
+            return P;
+        }
+        P = next(P);
+    }
+    return NULL;
+}
+
 void createListaktor(list_aktor &L) {
     first(L) = NULL;
 }
@@ -117,7 +128,7 @@ void showFilmaktor(list_Relasi L) {
         cout << "Tidak ada relasi film dan aktor." << endl;
     } else {
         while (R != NULL) {
-            cout << "Film: " << info(nextFilm(R)).judul 
+            cout << "Film: " << info(nextFilm(R)).judul
                  << " <---> Aktor: " << info(nextaktor(R)).namaaktor << endl;
             R = next(R);
         }
