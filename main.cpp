@@ -1,5 +1,5 @@
 #include <iostream>
-#include "bioskop01.h"
+#include "bioskop.h"
 
 using namespace std;
 
