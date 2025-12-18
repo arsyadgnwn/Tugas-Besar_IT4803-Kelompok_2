@@ -6,21 +6,22 @@
 
 using namespace std;
 
-#define info(P) P->info
-#define next(P) P->next
-#define prev(P) P->prev
-#define nextFilm(R) R->nextFilm
-#define nextaktor(R) R->nextaktor
-#define first(L) L.first
-#define last(L) L.last
+// Makro untuk kemudahan akses
+#define info(P) (P)->info
+#define next(P) (P)->next
+#define prev(P) (P)->prev
+#define nextFilm(R) (R)->nextFilm
+#define nextaktor(R) (R)->nextaktor
+#define first(L) ((L).first)
+#define last(L) ((L).last)
 
 /* -------------------------
-   STRUCT FILM (PARENT, DLL)
+    STRUCT FILM (PARENT - DLL)
    ------------------------- */
 struct Film {
     int id_Film;
     string judul;
-    string namaaktor;
+    string namaaktor; // Biasanya ini aktor utama
     int durasi;
     int jumlah_Penonton;
 };
@@ -39,12 +40,12 @@ struct list_Film {
 };
 
 /* -----------------------------
-   STRUCT AKTOR (CHILD, SLL)
+    STRUCT AKTOR (CHILD - SLL)
    ----------------------------- */
 struct aktor {
-    int id_Film;
+    int id_aktor; // Perbaikan: id_Film di child biasanya membingungkan, lebih baik id_aktor
     string namaaktor;
-    int durasi;
+    int umur;     // Saya ganti durasi menjadi umur agar lebih logis untuk data aktor
 };
 
 typedef struct elm_aktor *adr_aktor;
@@ -58,9 +59,9 @@ struct list_aktor {
     adr_aktor first;
 };
 
-/* ------------------
-   STRUCT RELASI SLL
-   ------------------ */
+/* -------------------------
+    STRUCT RELASI (SLL)
+   ------------------------- */
 typedef struct elm_Relasi *adr_Relasi;
 
 struct elm_Relasi {
@@ -73,18 +74,21 @@ struct list_Relasi {
     adr_Relasi first;
 };
 
-/* ------------
-   FUNGSI UTAMA
-   ------------ */
+/* -------------------------
+    PROTOTYPE FUNGSI
+   ------------------------- */
 
+// Manajemen List
 void createListFilm(list_Film &L);
 void createListaktor(list_aktor &L);
 void createListRelasi(list_Relasi &L);
 
+// Alokasi
 adr_Film newFilm(Film data);
-adr_Penonton newaktor(aktor data);
+adr_aktor newaktor(aktor data); // Koreksi: sebelumnya adr_Penonton
 adr_Relasi newRelasi(adr_Film film, adr_aktor aktor);
 
+// Operasi Film
 void insert_first_Film(list_Film &L, adr_Film P);
 void insert_last_Film(list_Film &L, adr_Film P);
 void showAllFilms(list_Film L);
@@ -92,13 +96,13 @@ void deleteFilm(list_Film &filmList, list_Relasi &relasiList, int idFilm);
 adr_Film findFilm(list_Film L, int idFilm);
 void editFilm(list_Film &L, int idFilm);
 
-void ShowAllaktor(list_aktor L);
-adr_Penonton findaktor(list_aktor L, int idaktor);
-void insert_first_aktor(list_aktor &L, adr_aktor P);
+// Operasi Aktor
 void insert_last_aktor(list_aktor &L, adr_aktor P);
-void editaktor(list_aktor &L, int idaktor);
+void showAllaktor(list_aktor L);
+adr_aktor findaktor(list_aktor L, int idaktor); // Koreksi: sebelumnya adr_Penonton
 
-void insertRelasi(list_Relasi &L, adr_Film film, adr_Penonton penonton);
+// Operasi Relasi
+void insertRelasi(list_Relasi &L, adr_Film film, adr_aktor aktor);
 void showFilmaktor(list_Relasi L);
 void findaktorFromFilm(list_Relasi &L, int idFilm);
 
